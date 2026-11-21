@@ -1,0 +1,108 @@
+
+<div class="form-page">
+
+  <div class="page-header">
+    <div>
+      <h2>{{ isEditMode() ? 'Edit Employee' : 'Add Employee' }}</h2>
+      <p>{{ isEditMode() ? 'Update employee details' : 'Enter employee information' }}</p>
+    </div>
+  </div>
+
+  <form [formGroup]="employeeForm" (ngSubmit)="submitForm()">
+
+    <div class="form-grid">
+
+      <mat-form-field appearance="outline">
+        <mat-label>First Name</mat-label>
+        <input matInput formControlName="firstName">
+
+        @if (employeeForm.get('firstName')?.hasError('required')
+          && employeeForm.get('firstName')?.touched) {
+          <mat-error>First name is required</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Last Name</mat-label>
+        <input matInput formControlName="lastName">
+
+        @if (employeeForm.get('lastName')?.hasError('required')
+          && employeeForm.get('lastName')?.touched) {
+          <mat-error>Last name is required</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email">
+
+        @if (employeeForm.get('email')?.hasError('required')
+          && employeeForm.get('email')?.touched) {
+          <mat-error>Email is required</mat-error>
+        }
+
+        @if (employeeForm.get('email')?.hasError('email')
+          && employeeForm.get('email')?.touched) {
+          <mat-error>Enter a valid email</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Phone</mat-label>
+        <input matInput formControlName="phone">
+
+        @if (employeeForm.get('phone')?.invalid
+          && employeeForm.get('phone')?.touched) {
+          <mat-error>Enter a valid phone number</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Department</mat-label>
+        <mat-select formControlName="department">
+          @for (department of departments; track department) {
+            <mat-option [value]="department">
+              {{ department }}
+            </mat-option>
+          }
+        </mat-select>
+
+        @if (employeeForm.get('department')?.hasError('required')
+          && employeeForm.get('department')?.touched) {
+          <mat-error>Department is required</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Job Title</mat-label>
+        <input matInput formControlName="title">
+
+        @if (employeeForm.get('title')?.hasError('required')
+          && employeeForm.get('title')?.touched) {
+          <mat-error>Job title is required</mat-error>
+        }
+      </mat-form-field>
+
+    </div>
+
+    <div class="form-actions">
+
+      <button mat-stroked-button type="button" (click)="cancel()">
+        Cancel
+      </button>
+
+      <button
+        mat-flat-button
+        color="primary"
+        type="submit"
+        [disabled]="submitting()">
+
+        {{ submitting() ? 'Saving...' : (isEditMode() ? 'Update Employee' : 'Save Employee') }}
+
+      </button>
+
+    </div>
+
+  </form>
+
+</div>

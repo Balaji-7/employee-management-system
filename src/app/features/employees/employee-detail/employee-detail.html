@@ -1,0 +1,58 @@
+<div class="detail-page">
+
+  <div class="page-header">
+    <button mat-stroked-button (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+      Back to Employees
+    </button>
+  </div>
+
+  @if (loading()) {
+    <p>Loading employee details...</p>
+  }
+
+  @else if (employee(); as emp) {
+
+    <mat-card class="detail-card">
+
+      <mat-card-header>
+        <img
+          mat-card-avatar
+          [src]="emp.image"
+          alt="Employee avatar">
+
+        <mat-card-title>
+          {{ emp.firstName }} {{ emp.lastName }}
+        </mat-card-title>
+
+        <mat-card-subtitle>
+          {{ emp.company.title }}
+        </mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+
+        <h3>Personal Information</h3>
+
+        <p><strong>Email:</strong> {{ emp.email }}</p>
+        <p><strong>Phone:</strong> {{ emp.phone }}</p>
+        <p><strong>Age:</strong> {{ emp.age ?? 'Not available' }}</p>
+
+        <h3>Work Information</h3>
+
+        <p><strong>Department:</strong> {{ emp.company.department }}</p>
+        <p><strong>Company:</strong> {{ emp.company.name }}</p>
+
+      </mat-card-content>
+
+      <mat-card-actions align="end">
+        <button mat-flat-button color="primary" (click)="editEmployee()">
+          <mat-icon>edit</mat-icon>
+          Edit Employee
+        </button>
+      </mat-card-actions>
+
+    </mat-card>
+  }
+
+</div>

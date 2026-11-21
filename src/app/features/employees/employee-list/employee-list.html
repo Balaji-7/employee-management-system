@@ -1,0 +1,130 @@
+<div class="employee-page">
+
+  <div class="page-header">
+    <div>
+      <h2>Employees</h2>
+      <p>Manage your organization's employees</p>
+    </div>
+
+    <button mat-flat-button color="primary" (click)="addEmployee()">
+      <mat-icon>add</mat-icon>
+      Add Employee
+    </button>
+  </div>
+
+  <div class="table-container">
+
+    <mat-form-field appearance="outline" class="search-field">
+      <mat-label>Search employees</mat-label>
+      <mat-icon matPrefix>search</mat-icon>
+
+      <input
+        matInput
+        placeholder="Search by name, email or department"
+        (input)="applyFilter($event)"
+      />
+    </mat-form-field>
+
+    @if (loading()) {
+      <div class="loading-container">
+        <mat-spinner diameter="40"></mat-spinner>
+        <p>Loading employees...</p>
+      </div>
+    }
+
+    @else if (errorMessage()) {
+      <div class="error-container">
+        <p>{{ errorMessage() }}</p>
+
+        <button mat-stroked-button color="primary" (click)="loadEmployees()">
+          Retry
+        </button>
+      </div>
+    }
+
+    @else {
+      <div class="table-scroll">
+
+        <table mat-table [dataSource]="dataSource" matSort>
+
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+            <td mat-cell *matCellDef="let employee">
+              {{ employee.id }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="employee">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Employee</th>
+            <td mat-cell *matCellDef="let employee">
+              <div class="employee-info">
+                <img [src]="employee.image" alt="Employee avatar" />
+                <span>
+                  {{ employee.firstName }} {{ employee.lastName }}
+                </span>
+              </div>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+            <td mat-cell *matCellDef="let employee">
+              {{ employee.email }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="phone">
+            <th mat-header-cell *matHeaderCellDef>Phone</th>
+            <td mat-cell *matCellDef="let employee">
+              {{ employee.phone }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="department">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Department</th>
+            <td mat-cell *matCellDef="let employee">
+              {{ employee.company.department }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Actions</th>
+            <td mat-cell *matCellDef="let employee">
+              <button mat-icon-button color="primary" aria-label="View employee" (click)="viewEmployee(employee.id)">
+                <mat-icon>visibility</mat-icon>
+              </button>
+
+              <button mat-icon-button color="accent" aria-label="Edit employee" (click)="editEmployee(employee.id)">
+                <mat-icon>edit</mat-icon>
+              </button>
+
+              <button mat-icon-button color="warn" aria-label="Delete employee" (click)="deleteEmployee(employee.id)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell no-data" [attr.colspan]="displayedColumns.length">
+              No employees found.
+            </td>
+          </tr>
+
+        </table>
+
+      </div>
+
+      <mat-paginator
+        [pageSize]="10"
+        [pageSizeOptions]="[5, 10, 20]"
+        showFirstLastButtons>
+      </mat-paginator>
+    }
+
+  </div>
+
+</div>

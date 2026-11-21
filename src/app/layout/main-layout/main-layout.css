@@ -1,0 +1,15 @@
+.layout-container {
+  height: calc(100vh - 64px);
+}
+
+.sidebar {
+  width: 240px;
+}
+
+.main-content {
+  background-color: #f5f6fa;
+}
+
+.page-content {
+  padding: 24px;
+}

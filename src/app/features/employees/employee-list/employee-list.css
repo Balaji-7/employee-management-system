@@ -1,0 +1,85 @@
+.employee-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.page-header h2 {
+  margin: 0 0 8px;
+}
+
+.page-header p {
+  margin: 0;
+  color: #777;
+}
+
+.table-container {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.search-field {
+  width: 100%;
+  max-width: 450px;
+  margin-bottom: 10px;
+}
+
+.table-scroll {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+}
+
+.employee-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 180px;
+}
+
+.employee-info img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.loading-container,
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  gap: 12px;
+}
+
+.error-container {
+  color: #d32f2f;
+}
+
+.no-data {
+  text-align: center;
+  padding: 24px;
+}
+
+@media (max-width: 650px) {
+  .page-header {
+    align-items: flex-start;
+    gap: 16px;
+    flex-direction: column;
+  }
+
+  .table-container {
+    padding: 12px;
+  }
+}

@@ -1,0 +1,48 @@
+<div class="dashboard">
+
+  <div class="page-heading">
+    <div>
+      <h2>Dashboard</h2>
+      <p>Welcome to Employee Management System</p>
+    </div>
+  </div>
+
+  <div class="stats-grid">
+
+    @for (card of dashboardCards; track card.title) {
+      <mat-card class="stat-card">
+        <mat-card-content>
+
+          <div class="stat-content">
+            <div>
+              <p class="stat-title">{{ card.title }}</p>
+              <h2>{{ card.value() }}</h2>
+            </div>
+
+            <mat-icon class="stat-icon">
+              {{ card.icon }}
+            </mat-icon>
+          </div>
+
+        </mat-card-content>
+      </mat-card>
+    }
+
+  </div>
+
+  <mat-card class="quick-actions">
+    <mat-card-header>
+      <mat-card-title>Quick Actions</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <p>Manage your employee records.</p>
+
+      <a routerLink="/employees" class="employee-link">
+        <mat-icon>people</mat-icon>
+        View Employees
+      </a>
+    </mat-card-content>
+  </mat-card>
+
+</div>
