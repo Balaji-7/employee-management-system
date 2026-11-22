@@ -1,1 +1,77 @@
-<p>login works!</p>
+
+<div class="login-container">
+
+  <mat-card class="login-card">
+
+    <div class="login-heading">
+      <mat-icon class="login-icon">admin_panel_settings</mat-icon>
+      <h2>Employee Management</h2>
+      <p>Sign in to continue</p>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+      <mat-form-field appearance="outline">
+        <mat-label>Username</mat-label>
+        <input
+          matInput
+          formControlName="username"
+          placeholder="Enter username">
+
+        @if (loginForm.get('username')?.hasError('required')
+          && loginForm.get('username')?.touched) {
+          <mat-error>Username is required</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+
+        <input
+          matInput
+          formControlName="password"
+          [type]="hidePassword() ? 'password' : 'text'"
+          placeholder="Enter password">
+
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          (click)="hidePassword.set(!hidePassword())">
+
+          <mat-icon>
+            {{ hidePassword() ? 'visibility_off' : 'visibility' }}
+          </mat-icon>
+        </button>
+
+        @if (loginForm.get('password')?.hasError('required')
+          && loginForm.get('password')?.touched) {
+          <mat-error>Password is required</mat-error>
+        }
+
+      </mat-form-field>
+
+      @if (errorMessage()) {
+        <p class="error-message">{{ errorMessage() }}</p>
+      }
+
+      <button
+        mat-flat-button
+        color="primary"
+        type="submit"
+        class="login-button"
+        [disabled]="loading()">
+
+        @if (loading()) {
+          <mat-spinner diameter="20"></mat-spinner>
+        } @else {
+          Sign In
+        }
+
+      </button>
+
+    </form>
+
+  </mat-card>
+
+</div>

@@ -1,9 +1,22 @@
 <mat-toolbar color="primary">
   <span>Employee Management System</span>
+<!-- 
+  <span class="spacer"></span> -->
 
-  <span class="spacer"></span>
+<div class="header-actions">
+  @if (authService.currentUser(); as user) {
+    <span class="welcome-text">
+      Welcome, {{ user.firstName }}
+    </span>
+  }
 
-  <button mat-icon-button aria-label="User profile">
+  <button mat-icon-button aria-label="Account">
     <mat-icon>account_circle</mat-icon>
   </button>
+
+  <button mat-button (click)="logout()" class="logout-button">
+    <mat-icon>logout</mat-icon>
+    Logout
+  </button>
+</div>
 </mat-toolbar>

@@ -148,9 +148,13 @@ export class EmployeeList implements OnInit {
       );
     },
     error: (error) => {
-      console.error('Delete employee error:', error);
-      this.errorMessage.set('Unable to delete employee.');
+      this.errorMessage.set(
+        error.userMessage || 'Unable to load employees.'
+      );
+      this.loading.set(false);
     }
   });
 }
+//Username: emilys
+// Password: emilyspass
 }
